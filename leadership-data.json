@@ -1,0 +1,435 @@
+{
+ "generated_at_et": "2026-11-03T14:58:15Z",
+ "source": "Charleston 2026 Goal Tracking and Savannah 2026 Goal Tracking spreadsheets, read-only. No Lightspeed data. Savannah revenue/UPC/ASV come from the month-sheet summary blocks, never the KPI Tracker.",
+ "units": "Money in dollars; UPC/ASV plain numbers; all *_pct and mix shares in percent units (21.68 means 21.68%). Months with no data yet report null actuals, never zeros.",
+ "stores": {
+  "Charleston": {
+   "months": {
+    "2026-10": {
+     "revenue_goal": 200000.0,
+     "revenue_actual_mtd": 266030.95,
+     "transactions_mtd": 1585.0,
+     "units_mtd": 4182.0,
+     "upc_actual": 2.64,
+     "asv_actual": 167.84,
+     "as_of": "2026-10-31",
+     "upc_goal": 2.6,
+     "asv_goal": 149.0,
+     "jean_goal": 22.0,
+     "jean_goal_label": "22-25%",
+     "jean_pct_actual": 21.91,
+     "mix_targets": {
+      "Tops": {
+       "target": 25.0,
+       "label": "25%"
+      },
+      "Bottoms": {
+       "target_low": 8.0,
+       "target_high": 10.0,
+       "label": "8-10%"
+      },
+      "Jeans": {
+       "target_low": 22.0,
+       "target_high": 25.0,
+       "label": "22-25%"
+      },
+      "Dresses": {
+       "target_low": 10.0,
+       "target_high": 12.0,
+       "label": "10-12%"
+      },
+      "Shoes": {
+       "target_low": 8.0,
+       "target_high": 9.0,
+       "label": "8-9%"
+      },
+      "Jewelry": {
+       "target_low": 11.0,
+       "target_high": 12.0,
+       "label": "11-12%"
+      },
+      "Outerwear": {
+       "target": 4.0,
+       "label": "4%"
+      },
+      "Belts": {
+       "target": 3.0,
+       "label": "3%"
+      },
+      "Bags": {
+       "target_low": 2.0,
+       "target_high": 3.0,
+       "label": "2-3%"
+      },
+      "Scarves": {
+       "target": 1.0,
+       "label": "1%"
+      },
+      "Sunnies": {
+       "target": 1.0,
+       "label": "1%"
+      }
+     },
+     "mix_current": {
+      "Tops": 29.29,
+      "Bottoms": 7.85,
+      "Jeans": 21.91,
+      "Dresses": 5.64,
+      "Shoes": 7.49,
+      "Jewelry": 7.77,
+      "Outerwear": 8.64,
+      "Belts": 2.73,
+      "Bags": 1.94,
+      "Scarves": 1.13,
+      "Sunnies": 0.63
+     },
+     "mix_coverage_pct": 95.02
+    },
+    "2026-11": {
+     "revenue_goal": 200000.0,
+     "revenue_actual_mtd": 7840.3,
+     "transactions_mtd": 66.0,
+     "units_mtd": 128.9,
+     "upc_actual": 1.95,
+     "asv_actual": 118.79,
+     "as_of": "2026-11-02",
+     "upc_goal": 2.4,
+     "asv_goal": 150.0,
+     "jean_goal": 23.0,
+     "jean_goal_label": "23%",
+     "jean_pct_actual": 24.12,
+     "mix_targets": {
+      "Jeans": {
+       "target": 23.0,
+       "label": "23%"
+      }
+     },
+     "mix_current": {
+      "Tops": 37.8,
+      "Bottoms": 8.44,
+      "Jeans": 24.12,
+      "Dresses": 7.68,
+      "Shoes": 4.86,
+      "Jewelry": 10.0,
+      "Outerwear": 2.1,
+      "Belts": 0.0,
+      "Bags": 1.57,
+      "Scarves": 0.11,
+      "Sunnies": 1.14
+     },
+     "mix_coverage_pct": 97.82
+    },
+    "2026-12": {
+     "revenue_goal": 140000.0,
+     "revenue_actual_mtd": null,
+     "transactions_mtd": null,
+     "units_mtd": null,
+     "upc_actual": null,
+     "asv_actual": null,
+     "as_of": null,
+     "upc_goal": null,
+     "asv_goal": null,
+     "jean_goal": null,
+     "jean_goal_label": null,
+     "jean_pct_actual": null,
+     "mix_targets": null,
+     "mix_current": null,
+     "mix_coverage_pct": null
+    }
+   },
+   "q4": {
+    "revenue_goal": 540000.0,
+    "revenue_actual": 273871.25,
+    "transactions": 1651.0,
+    "units": 4310.9,
+    "upc_actual": 2.29,
+    "asv_actual": 143.31,
+    "as_of": "2026-11-02",
+    "jean_pct_actual": 23.02,
+    "upc_goal": 2.5,
+    "asv_goal": 149.5,
+    "jean_goal": 22.5,
+    "mix_current": {
+     "Tops": 29.29,
+     "Bottoms": 7.85,
+     "Jeans": 21.91,
+     "Dresses": 5.64,
+     "Shoes": 7.49,
+     "Jewelry": 7.77,
+     "Outerwear": 8.64,
+     "Belts": 2.73,
+     "Bags": 1.94,
+     "Scarves": 1.13,
+     "Sunnies": 0.63
+    },
+    "mix_targets": {
+     "Tops": {
+      "target": 25.0,
+      "label": "25%"
+     },
+     "Bottoms": {
+      "target_low": 8.0,
+      "target_high": 10.0,
+      "label": "8-10%"
+     },
+     "Jeans": {
+      "target_low": 22.0,
+      "target_high": 25.0,
+      "label": "22-25%"
+     },
+     "Dresses": {
+      "target_low": 10.0,
+      "target_high": 12.0,
+      "label": "10-12%"
+     },
+     "Shoes": {
+      "target_low": 8.0,
+      "target_high": 9.0,
+      "label": "8-9%"
+     },
+     "Jewelry": {
+      "target_low": 11.0,
+      "target_high": 12.0,
+      "label": "11-12%"
+     },
+     "Outerwear": {
+      "target": 4.0,
+      "label": "4%"
+     },
+     "Belts": {
+      "target": 3.0,
+      "label": "3%"
+     },
+     "Bags": {
+      "target_low": 2.0,
+      "target_high": 3.0,
+      "label": "2-3%"
+     },
+     "Scarves": {
+      "target": 1.0,
+      "label": "1%"
+     },
+     "Sunnies": {
+      "target": 1.0,
+      "label": "1%"
+     }
+    },
+    "mix_coverage_pct": 95.02
+   },
+   "q4_method": "Q4 revenue/transactions/units are totals across months with data; Q4 UPC/ASV/Jean and Q4 goals are the mean of the monthly values, so the quarter equals out from its months"
+  },
+  "Savannah": {
+   "months": {
+    "2026-10": {
+     "revenue_goal": 145000.0,
+     "revenue_actual_mtd": 141840.8,
+     "transactions_mtd": 1068.0,
+     "units_mtd": 2276.0,
+     "upc_actual": 2.13,
+     "asv_actual": 132.81,
+     "jean_pct_actual": 21.61,
+     "as_of": "2026-10-31",
+     "upc_goal": 2.3,
+     "asv_goal": 137.0,
+     "jean_goal": 22.0,
+     "jean_goal_label": "22%",
+     "jean_pct_cat_share": 20.97,
+     "mix_targets": {
+      "Tops": {
+       "target": 25.0,
+       "label": "25%"
+      },
+      "Bottoms": {
+       "target_low": 8.0,
+       "target_high": 10.0,
+       "label": "8-10%"
+      },
+      "Jeans": {
+       "target_low": 22.0,
+       "target_high": 25.0,
+       "label": "22-25%"
+      },
+      "Dresses": {
+       "target_low": 10.0,
+       "target_high": 12.0,
+       "label": "10-12%"
+      },
+      "Shoes": {
+       "target_low": 8.0,
+       "target_high": 9.0,
+       "label": "8-9%"
+      },
+      "Jewelry": {
+       "target_low": 11.0,
+       "target_high": 12.0,
+       "label": "11-12%"
+      },
+      "Outerwear": {
+       "target": 4.0,
+       "label": "4%"
+      },
+      "Belts": {
+       "target": 3.0,
+       "label": "3%"
+      },
+      "Bags": {
+       "target_low": 2.0,
+       "target_high": 3.0,
+       "label": "2-3%"
+      },
+      "Scarves": {
+       "target": 1.0,
+       "label": "1%"
+      },
+      "Sunnies": {
+       "target": 1.0,
+       "label": "1%"
+      }
+     },
+     "mix_current": {
+      "Tops": 28.48,
+      "Bottoms": 7.29,
+      "Jeans": 20.97,
+      "Dresses": 5.92,
+      "Shoes": 6.35,
+      "Jewelry": 11.86,
+      "Outerwear": 6.36,
+      "Belts": 2.06,
+      "Bags": 1.81,
+      "Scarves": 1.54,
+      "Sunnies": 1.22
+     },
+     "mix_coverage_pct": 93.86
+    },
+    "2026-11": {
+     "revenue_goal": 145000.0,
+     "revenue_actual_mtd": 3290.2,
+     "transactions_mtd": 40.0,
+     "units_mtd": 52.0,
+     "upc_actual": 1.3,
+     "asv_actual": 82.25,
+     "jean_pct_actual": null,
+     "as_of": "2026-11-02",
+     "upc_goal": 2.2,
+     "asv_goal": 130.0,
+     "jean_goal": 22.0,
+     "jean_goal_label": "22%",
+     "jean_pct_cat_share": 11.76,
+     "mix_targets": null,
+     "mix_current": {
+      "Tops": 25.65,
+      "Bottoms": 5.93,
+      "Jeans": 11.76,
+      "Dresses": 6.81,
+      "Shoes": 9.18,
+      "Jewelry": 8.57,
+      "Outerwear": 2.64,
+      "Belts": 0.0,
+      "Bags": 1.88,
+      "Scarves": 2.35,
+      "Sunnies": 17.84
+     },
+     "mix_coverage_pct": 92.61
+    },
+    "2026-12": {
+     "revenue_goal": 120000.0,
+     "revenue_actual_mtd": null,
+     "transactions_mtd": null,
+     "units_mtd": null,
+     "upc_actual": null,
+     "asv_actual": null,
+     "jean_pct_actual": null,
+     "as_of": null,
+     "upc_goal": 2.2,
+     "asv_goal": 130.0,
+     "jean_goal": 22.0,
+     "jean_goal_label": "22%",
+     "jean_pct_cat_share": null,
+     "mix_targets": null,
+     "mix_current": null,
+     "mix_coverage_pct": null
+    }
+   },
+   "q4": {
+    "revenue_goal": 410000.0,
+    "revenue_actual": 145131.0,
+    "transactions": 1108.0,
+    "units": 2328.0,
+    "upc_actual": 1.71,
+    "asv_actual": 107.53,
+    "as_of": "2026-11-02",
+    "jean_pct_actual": 21.61,
+    "upc_goal": 2.25,
+    "asv_goal": 133.5,
+    "jean_goal": 22.0,
+    "mix_current": {
+     "Tops": 28.48,
+     "Bottoms": 7.29,
+     "Jeans": 20.97,
+     "Dresses": 5.92,
+     "Shoes": 6.35,
+     "Jewelry": 11.86,
+     "Outerwear": 6.36,
+     "Belts": 2.06,
+     "Bags": 1.81,
+     "Scarves": 1.54,
+     "Sunnies": 1.22
+    },
+    "mix_targets": {
+     "Tops": {
+      "target": 25.0,
+      "label": "25%"
+     },
+     "Bottoms": {
+      "target_low": 8.0,
+      "target_high": 10.0,
+      "label": "8-10%"
+     },
+     "Jeans": {
+      "target_low": 22.0,
+      "target_high": 25.0,
+      "label": "22-25%"
+     },
+     "Dresses": {
+      "target_low": 10.0,
+      "target_high": 12.0,
+      "label": "10-12%"
+     },
+     "Shoes": {
+      "target_low": 8.0,
+      "target_high": 9.0,
+      "label": "8-9%"
+     },
+     "Jewelry": {
+      "target_low": 11.0,
+      "target_high": 12.0,
+      "label": "11-12%"
+     },
+     "Outerwear": {
+      "target": 4.0,
+      "label": "4%"
+     },
+     "Belts": {
+      "target": 3.0,
+      "label": "3%"
+     },
+     "Bags": {
+      "target_low": 2.0,
+      "target_high": 3.0,
+      "label": "2-3%"
+     },
+     "Scarves": {
+      "target": 1.0,
+      "label": "1%"
+     },
+     "Sunnies": {
+      "target": 1.0,
+      "label": "1%"
+     }
+    },
+    "mix_coverage_pct": 93.86
+   },
+   "q4_method": "Q4 revenue/transactions/units are totals across months with data; Q4 UPC/ASV/Jean and Q4 goals are the mean of the monthly values, so the quarter equals out from its months"
+  }
+ }
+}

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leadership Dashboard | Bobbles &amp; Lace</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f8f8f7; --tint:#ece9e4; --accent:#e1d4ca; --line:#ddd7d2; --brown:#4b3328; --text:#000; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Raleway, sans-serif; line-height:1.5; }
+  .wrap { max-width:920px; margin:0 auto; padding:32px 20px 72px; }
+  .brand { font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--brown); font-weight:700; }
+  h1 { color:var(--brown); font-size:30px; margin:10px 0 6px; line-height:1.2; }
+  .sub { color:#555; margin:0 0 24px; font-size:17px; }
+  .months { display:flex; gap:10px; margin:20px 0 28px; flex-wrap:wrap; }
+  .months button { font-family:inherit; border:1px solid var(--line); background:#fff; padding:10px 18px; border-radius:999px; cursor:pointer; font-size:15px; }
+  .months button.on { background:var(--brown); color:#fff; border-color:var(--brown); }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:24px; margin-bottom:24px; }
+  .card h2 { color:var(--brown); font-size:18px; margin:0 0 16px; }
+  .big { font-size:40px; font-weight:700; color:var(--brown); }
+  table { width:100%; border-collapse:collapse; font-size:15px; }
+  th { text-align:left; color:var(--brown); border-bottom:1px solid var(--line); padding:12px 8px; }
+  td { padding:12px 8px; border-bottom:1px solid var(--tint); vertical-align:top; line-height:1.5; }
+  td.num, th.num { text-align:right; }
+  .muted { color:#666; }
+  .detail { font-size:13px; color:#666; margin-top:6px; line-height:1.55; }
+  .note { font-size:13px; color:#666; margin-top:12px; line-height:1.5; }
+  .dirgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px; }
+  .dircard { background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; cursor:pointer; text-align:left; font-family:inherit; }
+  .dircard h3 { color:var(--brown); margin:0 0 6px; font-size:18px; }
+  .dircard p { margin:6px 0; font-size:14px; line-height:1.5; }
+  .back { background:none; border:none; color:var(--brown); font-family:inherit; font-size:15px; cursor:pointer; padding:0 0 16px; text-decoration:underline; }
+  .err { background:#fff; border:1px solid var(--line); border-radius:12px; padding:32px 20px; text-align:center; }
+  .err h2 { color:var(--brown); }
+  .fb h3 { color:var(--brown); font-size:16px; margin:20px 0 6px; }
+  .fb p { margin:0 0 12px; line-height:1.5; }
+  .scoregrid { display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; }
+  .score-widget { border:1px solid var(--line); border-radius:10px; padding:16px 18px; background:#f8f8f7; }
+  .sw-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  .sw-name { color:var(--brown); font-weight:700; font-size:16px; }
+  .sw-pts { color:var(--brown); font-weight:700; font-size:15px; white-space:nowrap; }
+  .sw-actual { margin:8px 0 10px; font-size:15px; }
+  .sw-track { height:10px; background:var(--tint); border-radius:999px; overflow:hidden; margin:0 0 10px; }
+  .sw-fill { height:100%; background:var(--brown); border-radius:999px; }
+  .card-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  .goals-badge { background:var(--tint); color:var(--brown); font-size:12px; font-weight:700; letter-spacing:.12em; padding:6px 12px; border-radius:999px; white-space:nowrap; }
+  .goalsgrid { display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; }
+  .goalcard { border:1px solid var(--line); border-radius:10px; padding:16px 18px; background:#f8f8f7; }
+  .goal-label { color:var(--brown); font-size:12px; font-weight:700; letter-spacing:.12em; }
+  .goal-value { font-size:26px; font-weight:700; color:var(--brown); margin:10px 0 4px; }
+  .goal-value.muted { color:#666; font-size:20px; }
+  .goal-line { font-size:15px; margin:4px 0; }
+  .goal-note { font-size:13px; color:#666; margin-top:8px; line-height:1.5; }
+  .twocol { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .tiergrid { display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; margin-top:16px; }
+  .tiercard { border:1px solid var(--line); border-radius:10px; padding:24px 16px 16px; background:#fff; }
+  .tiercard.hit { background:var(--accent); border-color:var(--accent); }
+  .tier-amt { color:var(--brown); font-size:20px; font-weight:700; }
+  .tier-range { font-size:13px; color:#666; margin-top:4px; }
+  .youarehere { display:inline-block; margin-top:8px; font-size:12px; font-weight:700; color:var(--brown); letter-spacing:.08em; }
+  @media (max-width:900px) { .goalsgrid { grid-template-columns:repeat(2, 1fr); } .tiergrid { grid-template-columns:repeat(3, 1fr); } }
+  @media (max-width:640px) { .scoregrid { grid-template-columns:1fr; } .twocol { grid-template-columns:1fr; } .goalsgrid { grid-template-columns:1fr; } .tiergrid { grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px) { h1 { font-size:24px; } .big { font-size:32px; } .card { padding:20px; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="brand">Bobbles &amp; Lace</div>
+  <p class="sub">Loading your leadership view...</p>
+</div>
+<script>
+var WORKER = "https://bobbles-dashboard-feed.kelsey-684.workers.dev";
+var MONTHS = [
+  { key: "2026-10", label: "October" },
+  { key: "2026-11", label: "November" },
+  { key: "2026-12", label: "December" },
+  { key: "q4", label: "Q4" }
+];
+var MIX_ORDER = ["Tops", "Bottoms", "Jeans", "Dresses", "Shoes", "Jewelry", "Outerwear", "Belts", "Bags", "Scarves", "Sunnies", "Core Product"];
+var SECTIONS = [
+  { id: "revenue", name: "Revenue", max: 25, detail: "Sales against the store's goal. 115% or more = 25, 105-114% = 22, 100-104% = 20, below 100% = 0-15 on context and trends." },
+  { id: "upc", name: "Units per sale", max: 15, detail: "Pieces per transaction against target. At or above target = 15, trending up but under target = 10-14, consistently under = 0-9." },
+  { id: "asv", name: "Average sale", max: 10, detail: "Dollars per transaction against target. At or above target = 10, slightly below = 6-9, consistently under = 0-5." },
+  { id: "denim", name: "Denim", max: 10, detail: "Denim share of sales. 20% or more through the quarter = 10, 18-19% or trending up = 6-9, below 18% and not trending up = 0-5." },
+  { id: "leadership", name: "Leadership", max: 15, detail: "Leading, coaching, and developing the team. Strong and consistent = 10-15, inconsistent or reactive = 8-12, needs improvement = 0-7." },
+  { id: "accountability", name: "Accountability", max: 15, detail: "Follow-through, schedules, standards, and systems. Consistently executes without chasing = 10-15, occasionally misses = 8-12, frequent follow-up needed = 0-7." },
+  { id: "professionalism", name: "Professionalism", max: 10, detail: "Reliability, communication, and presence. Consistently reliable = 9-10, generally reliable = 5-8, frequent follow-up needed = 0-4." }
+];
+var TIERS = [[90, "$2,500"], [80, "$2,000"], [70, "$1,500"], [60, "$1,000"]];
+
+function esc(s) {
+  return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function money(n) {
+  if (n == null) return "-";
+  return "$" + Math.round(n).toLocaleString("en-US");
+}
+function pct(n, dp) {
+  if (n == null) return "-";
+  return n.toFixed(dp == null ? 2 : dp) + "%";
+}
+function fmtDate(iso) {
+  if (!iso) return null;
+  var d = new Date(iso.length <= 10 ? iso + "T12:00:00" : iso);
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+}
+// Eastern date for pull/feedback timestamps (generated_at_et is UTC).
+function fmtDateET(iso) {
+  if (!iso) return null;
+  var d = new Date(iso.length <= 10 ? iso + "T12:00:00" : iso);
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString("en-US", { timeZone: "America/New_York", month: "long", day: "numeric", year: "numeric" });
+}
+function tierFor(total) {
+  if (total == null) return null;
+  for (var i = 0; i < TIERS.length; i++) if (total >= TIERS[i][0]) return TIERS[i][1];
+  return "No bonus";
+}
+
+// Tier band a point total falls in, whether the tier is final or the
+// director is only tracking there so far.
+function tierBand(total) {
+  if (total == null) return null;
+  if (total >= 90) return { amount: "$2,500", range: "90 to 100 points" };
+  if (total >= 80) return { amount: "$2,000", range: "80 to 89 points" };
+  if (total >= 70) return { amount: "$1,500", range: "70 to 79 points" };
+  if (total >= 60) return { amount: "$1,000", range: "60 to 69 points" };
+  return { amount: "No bonus", range: "Below 60 points" };
+}
+
+// Scorecard bands that need no judgment. Anything in a judgment band
+// (revenue below goal, UPC/ASV below goal, denim below 20%) stays unset
+// until the monthly check-in sets it.
+function mechScore(id, m) {
+  if (!m) return null;
+  if (id === "revenue") {
+    if (m.revenue_actual_mtd == null || !m.revenue_goal) return null;
+    var p = m.revenue_actual_mtd / m.revenue_goal;
+    if (p >= 1.15) return 25;
+    if (p >= 1.05) return 22;
+    if (p >= 1.0) return 20;
+    return null;
+  }
+  if (id === "upc") {
+    if (m.upc_actual == null || m.upc_goal == null) return null;
+    return m.upc_actual >= m.upc_goal ? 15 : null;
+  }
+  if (id === "asv") {
+    if (m.asv_actual == null || m.asv_goal == null) return null;
+    return m.asv_actual >= m.asv_goal ? 10 : null;
+  }
+  if (id === "denim") {
+    if (m.jean_pct_actual == null) return null;
+    return m.jean_pct_actual >= 20 ? 10 : null;
+  }
+  return null;
+}
+
+// Score for one component in one month. A check-in override wins;
+// otherwise the mechanical band applies. For Q4, the component score is
+// the mean of the monthly scores that are set.
+function compScore(id, monthKey, record, storeData) {
+  if (monthKey === "q4") {
+    var vals = [];
+    ["2026-10", "2026-11", "2026-12"].forEach(function (mk) {
+      var s = compScore(id, mk, record, storeData);
+      if (s != null) vals.push(s);
+    });
+    if (!vals.length) return null;
+    return Math.round(vals.reduce(function (a, b) { return a + b; }, 0) / vals.length);
+  }
+  var rec = record && record.months && record.months[monthKey];
+  var over = rec && rec.scores ? rec.scores[id] : null;
+  if (over != null) return over;
+  var m = storeData && storeData.months ? storeData.months[monthKey] : null;
+  return mechScore(id, m);
+}
+
+function monthTotal(monthKey, record, storeData) {
+  var sum = 0, n = 0;
+  SECTIONS.forEach(function (s) {
+    var v = compScore(s.id, monthKey, record, storeData);
+    if (v != null) { sum += v; n++; }
+  });
+  if (monthKey === "q4") {
+    // Q4 total is the mean of the monthly totals for months fully scored.
+    var totals = [];
+    ["2026-10", "2026-11", "2026-12"].forEach(function (mk) {
+      var t = monthTotal(mk, record, storeData);
+      if (t.complete) totals.push(t.total);
+    });
+    if (!totals.length) return { total: null, counted: 0, complete: false, q4months: 0 };
+    var avg = Math.round(totals.reduce(function (a, b) { return a + b; }, 0) / totals.length);
+    return { total: avg, counted: 7, complete: totals.length === 3, q4months: totals.length };
+  }
+  return { total: n ? sum : null, counted: n, complete: n === SECTIONS.length };
+}
+
+function monthBlock(monthKey, storeData) {
+  if (monthKey === "q4") {
+    var b = storeData ? storeData.q4 : null;
+    // The Q4 block names the quarter-to-date revenue total revenue_actual,
+    // while monthly blocks use revenue_actual_mtd. Normalize so every
+    // revenue reader works on Q4 too.
+    if (b && b.revenue_actual_mtd == null && b.revenue_actual != null) b.revenue_actual_mtd = b.revenue_actual;
+    return b;
+  }
+  return storeData && storeData.months ? storeData.months[monthKey] : null;
+}
+
+function actualLine(id, m) {
+  if (!m) return "-";
+  if (id === "revenue") {
+    if (m.revenue_actual_mtd == null) return "No actuals yet";
+    var p = m.revenue_goal ? Math.round(m.revenue_actual_mtd / m.revenue_goal * 100) : null;
+    return money(m.revenue_actual_mtd) + " vs " + money(m.revenue_goal) + (p != null ? " (" + p + "% of goal)" : "");
+  }
+  if (id === "upc") {
+    if (m.upc_actual == null) return "No actuals yet";
+    return m.upc_actual.toFixed(2) + " vs goal " + (m.upc_goal != null ? m.upc_goal.toFixed(2) : "-");
+  }
+  if (id === "asv") {
+    if (m.asv_actual == null) return "No actuals yet";
+    return money(m.asv_actual) + " vs goal " + (m.asv_goal != null ? money(m.asv_goal) : "-");
+  }
+  if (id === "denim") {
+    if (m.jean_pct_actual == null) return "No actuals yet";
+    return pct(m.jean_pct_actual) + " vs goal " + (m.jean_goal_label || (m.jean_goal != null ? m.jean_goal + "%" : "-"));
+  }
+  return "Set at check-in";
+}
+
+function opportunities(monthKey, storeData) {
+  var m = monthBlock(monthKey, storeData);
+  var out = [];
+  if (!m || m.revenue_actual_mtd == null) return out;
+  if (m.revenue_goal && m.revenue_actual_mtd < m.revenue_goal)
+    out.push("Revenue at " + Math.round(m.revenue_actual_mtd / m.revenue_goal * 100) + "% of goal");
+  if (m.upc_goal != null && m.upc_actual != null && m.upc_actual < m.upc_goal)
+    out.push("Units per sale " + m.upc_actual.toFixed(2) + " vs goal " + m.upc_goal.toFixed(2));
+  if (m.asv_goal != null && m.asv_actual != null && m.asv_actual < m.asv_goal)
+    out.push("Average sale " + money(m.asv_actual) + " vs goal " + money(m.asv_goal));
+  if (m.jean_goal != null && m.jean_pct_actual != null && m.jean_pct_actual < m.jean_goal)
+    out.push("Denim " + pct(m.jean_pct_actual) + " vs goal " + (m.jean_goal_label || m.jean_goal + "%"));
+  var cur = m.mix_current, tgt = m.mix_targets;
+  if (cur && tgt) {
+    MIX_ORDER.forEach(function (cat) {
+      var t = tgt[cat], c = cur[cat];
+      if (!t || c == null) return;
+      var low = t.target != null ? t.target : t.target_low;
+      if (low != null && c < low) out.push(cat + " mix " + pct(c) + " vs target " + t.label);
+    });
+  }
+  return out;
+}
+
+function monthsBar(current) {
+  return '<div class="months">' + MONTHS.map(function (mo) {
+    return '<button class="' + (mo.key === current ? "on" : "") + '" data-month="' + mo.key + '">' + mo.label + "</button>";
+  }).join("") + "</div>";
+}
+
+function standingCard(monthKey, record, storeData) {
+  var t = monthTotal(monthKey, record, storeData);
+  var tier = t.complete ? tierFor(t.total) : null;
+  var band = tierBand(t.total);
+  var isQ4 = monthKey === "q4";
+  var html = '<div class="card"><h2>Bonus standing' + (isQ4 ? " (quarterly average)" : "") + "</h2>";
+  if (t.total == null) {
+    html += '<p class="muted">Not yet scored. Scores are set at your monthly check-in.</p>';
+  } else if (!t.complete) {
+    if (isQ4) {
+      html += '<div class="big">' + t.total + " <span style='font-size:18px'>quarterly average so far</span></div>";
+      html += '<p class="muted">Currently tracking at the ' + band.amount + " tier. The quarterly score is the average of the monthly scores (average of " + t.q4months + " fully scored month" + (t.q4months === 1 ? "" : "s") + " so far). Tier is final once all three months are scored.</p>";
+    } else {
+      html += '<div class="big">' + t.total + " <span style='font-size:18px'>points so far</span></div>";
+      html += '<p class="muted">' + t.counted + " of 7 sections scored. Currently tracking at the " + band.amount + " tier (" + band.range + "). Tier is final once all sections are scored.</p>";
+    }
+  } else {
+    html += '<div class="big">' + t.total + " / 100</div>";
+    html += '<p>Bonus tier: <strong>' + tier + "</strong>" + (isQ4 ? " (quarterly average of the three monthly scores)" : "") + "</p>";
+  }
+  html += tierCardsGrid(monthKey, record, storeData);
+  html += "</div>";
+  return html;
+}
+
+function monthNameFor(monthKey) {
+  if (monthKey === "q4") return "Quarter 4";
+  for (var i = 0; i < MONTHS.length; i++) if (MONTHS[i].key === monthKey) return MONTHS[i].label;
+  return monthKey;
+}
+
+function goalsCard(monthKey, record, storeData) {
+  var m = monthBlock(monthKey, storeData);
+  var isQ4 = monthKey === "q4";
+  var mn = monthNameFor(monthKey);
+  var goalNote = function (id) {
+    if (isQ4) return id === "revenue" ? "Quarter-to-date." : "Average of monthly goals.";
+    if (id === "revenue") return "Full points at 115% of goal.";
+    if (id === "upc" || id === "asv") return record.store === "Charleston" ? mn + " 2025 actual." : "Store KPI goal.";
+    return "";
+  };
+  var card = function (label, value, goal, note) {
+    return '<div class="goalcard"><div class="goal-label">' + label + "</div>"
+      + '<div class="goal-value' + (value === "No actuals yet" ? " muted" : "") + '">' + value + "</div>"
+      + '<div class="goal-line">Goal ' + goal + "</div>"
+      + (note ? '<div class="goal-note">' + note + "</div>" : "") + "</div>";
+  };
+  var rev = (m && m.revenue_actual_mtd != null) ? money(m.revenue_actual_mtd) : "No actuals yet";
+  var revGoal = (m && m.revenue_goal) ? money(m.revenue_goal) : "-";
+  var upc = (m && m.upc_actual != null) ? m.upc_actual.toFixed(2) : "No actuals yet";
+  var upcGoal = (m && m.upc_goal != null) ? m.upc_goal.toFixed(2) : "-";
+  var asv = (m && m.asv_actual != null) ? money(m.asv_actual) : "No actuals yet";
+  var asvGoal = (m && m.asv_goal != null) ? money(m.asv_goal) : "-";
+  var den = (m && m.jean_pct_actual != null) ? pct(m.jean_pct_actual) : "No actuals yet";
+  var denGoal = (m && (m.jean_goal_label || m.jean_goal != null)) ? (m.jean_goal_label || m.jean_goal + "%") : "-";
+  var denNote = isQ4 ? "Average of monthly goals." : "";
+  var html = '<div class="card"><div class="card-head"><h2>Goals vs. actuals</h2><span class="goals-badge">Goals set</span></div>';
+  html += '<p class="sub">' + esc(record.store) + ", " + (isQ4 ? "Quarter 4" : mn + " 2026") + "</p>";
+  html += '<div class="goalsgrid">';
+  html += card("Revenue, " + mn, rev, revGoal, goalNote("revenue"));
+  html += card("Units per sale (UPC)", upc, upcGoal, goalNote("upc"));
+  html += card("Average sale value (ASV)", asv, asvGoal, goalNote("asv"));
+  html += card("Denim (Jean % of sales)", den, denGoal, denNote);
+  html += "</div></div>";
+  return html;
+}
+
+// Bar width for a section widget. Numeric sections show actual vs goal
+// (capped at 100%); judgment sections show points earned vs max once
+// scored. Null means no bar, just the text.
+function barPct(id, m, v) {
+  if (!m) return null;
+  if (id === "revenue") {
+    if (m.revenue_actual_mtd == null || !m.revenue_goal) return null;
+    return Math.min(100, Math.round(m.revenue_actual_mtd / m.revenue_goal * 100));
+  }
+  if (id === "upc") {
+    if (m.upc_actual == null || m.upc_goal == null) return null;
+    return Math.min(100, Math.round(m.upc_actual / m.upc_goal * 100));
+  }
+  if (id === "asv") {
+    if (m.asv_actual == null || m.asv_goal == null) return null;
+    return Math.min(100, Math.round(m.asv_actual / m.asv_goal * 100));
+  }
+  if (id === "denim") {
+    if (m.jean_pct_actual == null || m.jean_goal == null) return null;
+    return Math.min(100, Math.round(m.jean_pct_actual / m.jean_goal * 100));
+  }
+  if (v != null) {
+    var max = 0;
+    SECTIONS.forEach(function (s) { if (s.id === id) max = s.max; });
+    return max ? Math.round(v / max * 100) : null;
+  }
+  return null;
+}
+
+function breakdownCard(monthKey, record, storeData) {
+  var m = monthBlock(monthKey, storeData);
+  var widgets = SECTIONS.map(function (s) {
+    var v = compScore(s.id, monthKey, record, storeData);
+    var pts = v != null ? v + " / " + s.max : '<span class="muted">Not yet scored</span>';
+    var bar = barPct(s.id, m, v);
+    var barHtml = bar != null
+      ? '<div class="sw-track"><div class="sw-fill" style="width:' + bar + '%"></div></div>'
+      : "";
+    return '<div class="score-widget"><div class="sw-head"><span class="sw-name">' + s.name + '</span><span class="sw-pts">' + pts + "</span></div>"
+      + '<div class="sw-actual">' + actualLine(s.id, m) + "</div>"
+      + barHtml
+      + '<div class="detail">' + s.detail + "</div></div>";
+  }).join("");
+  return '<div class="card"><h2>Score breakdown</h2><div class="scoregrid">' + widgets + "</div>" + (monthKey === "q4" ? '<p class="note">Quarterly section scores are the average of the monthly section scores.</p>' : "") + "</div>";
+}
+
+function mixCard(monthKey, storeData) {
+  var m = monthBlock(monthKey, storeData);
+  var html = '<div class="card"><h2>Category mix: target vs current</h2>';
+  if (!m || !m.mix_current) {
+    html += '<p class="muted">No mix data yet for this month.</p></div>';
+    return html;
+  }
+  var rows = MIX_ORDER.map(function (cat) {
+    var t = m.mix_targets ? m.mix_targets[cat] : null;
+    var c = m.mix_current[cat];
+    return "<tr><td>" + cat + "</td><td>" + (t ? t.label : "-") + "</td><td class='num'>" + (c != null ? pct(c) : "-") + "</td></tr>";
+  }).join("");
+  html += "<table><tr><th>Category</th><th>Target</th><th class='num'>Current</th></tr>" + rows + "</table>";
+  if (m.mix_coverage_pct != null && m.mix_coverage_pct < 98)
+    html += '<p class="note">Categories shown cover ' + pct(m.mix_coverage_pct, 2) + " of the month total. The rest is not broken out in the sheet.</p>";
+  if (monthKey === "q4")
+    html += '<p class="note">Mix reflects October, the only month with category data so far.</p>';
+  html += "</div>";
+  return html;
+}
+
+function feedbackCard(monthKey, record) {
+  var rec = record && record.months ? record.months[monthKey] : null;
+  var fb = rec ? rec.feedback : null;
+  var html = '<div class="card"><h2>Feedback</h2>';
+  if (!fb || (!fb.goingWell && !fb.focus && !fb.priorities)) {
+    var mn = monthNameFor(monthKey);
+    var when = monthKey === "q4" ? "quarterly check-in" : mn + " check-in";
+    html += "<p><strong>Not yet</strong></p>";
+    html += "<p class='muted'>Posts at the " + when + ".</p></div>";
+    return html;
+  }
+  html += '<div class="fb">';
+  if (fb.goingWell) html += "<h3>What is going well</h3><p>" + esc(fb.goingWell) + "</p>";
+  if (fb.focus) html += "<h3>Current focus</h3><p>" + esc(fb.focus) + "</p>";
+  if (fb.priorities) html += "<h3>Development priorities</h3><p>" + esc(fb.priorities) + "</p>";
+  html += "</div>";
+  if (fb.updated_at) html += '<p class="note">Feedback addressed on ' + fmtDateET(fb.updated_at) + ".</p>";
+  html += "</div>";
+  return html;
+}
+
+function oppsCard(monthKey, storeData) {
+  var opps = opportunities(monthKey, storeData);
+  var html = '<div class="card"><h2>Focus &amp; opportunities</h2>';
+  if (!opps.length) html += '<p class="muted">No gaps against goal this month.</p>';
+  else html += "<ul>" + opps.map(function (o) { return "<li>" + esc(o) + "</li>"; }).join("") + "</ul>";
+  html += "</div>";
+  return html;
+}
+
+function tierCardsGrid(monthKey, record, storeData) {
+  var t = monthTotal(monthKey, record, storeData);
+  var band = tierBand(t.total);
+  var tiers = [["$2,500", "90 to 100 points"], ["$2,000", "80 to 89 points"], ["$1,500", "70 to 79 points"], ["$1,000", "60 to 69 points"], ["No bonus", "Below 60 points"]];
+  var cards = tiers.map(function (tr) {
+    var hit = band && band.amount === tr[0];
+    var tag = hit ? '<span class="youarehere">' + (t.complete ? "Your tier" : "You are here") + "</span>" : "";
+    return '<div class="tiercard' + (hit ? " hit" : "") + '"><div class="tier-amt">' + tr[0] + "</div><div class='tier-range'>" + tr[1] + "</div>" + tag + "</div>";
+  }).join("");
+  return '<div class="tiergrid">' + cards + "</div>";
+}
+
+function directorView(monthKey, record, storeData, backBtn, refreshedAt) {
+  var m = monthBlock(monthKey, storeData);
+  var asOf = m && m.as_of ? fmtDate(m.as_of) : null;
+  var html = '<div class="brand">Bobbles &amp; Lace</div>';
+  html += "<h1>Leadership Dashboard</h1>";
+  html += '<p class="sub">' + esc(record.name) + " | " + esc(record.store) + (monthKey === "q4" ? " | Quarter 4" : "") + "</p>";
+  if (backBtn) html += '<button class="back" id="backBtn">Back to all directors</button>';
+  html += monthsBar(monthKey);
+  html += standingCard(monthKey, record, storeData);
+  html += goalsCard(monthKey, record, storeData);
+  html += breakdownCard(monthKey, record, storeData);
+  html += mixCard(monthKey, storeData);
+  html += '<div class="twocol">' + feedbackCard(monthKey, record) + oppsCard(monthKey, storeData) + "</div>";
+  if (asOf) html += '<p class="note">Numbers through ' + asOf + ", from your store goal tracking sheets.</p>";
+  var ref = refreshedAt ? fmtDateET(refreshedAt) : null;
+  if (ref) html += '<p class="note">Metrics refreshed ' + ref + ".</p>";
+  return html;
+}
+
+function overviewView(monthKey, directors, storeDataAll) {
+  var html = '<div class="brand">Bobbles &amp; Lace</div>';
+  html += "<h1>Leadership overview</h1>";
+  html += '<p class="sub">All directors. Select one for the full view.</p>';
+  html += monthsBar(monthKey);
+  html += '<div class="dirgrid">';
+  Object.keys(directors).forEach(function (id) {
+    var rec = directors[id];
+    var sd = storeDataAll[rec.store];
+    var m = monthBlock(monthKey, sd);
+    var t = monthTotal(monthKey, rec, sd);
+    var tier = t.complete ? tierFor(t.total) : null;
+    html += '<button class="dircard" data-dir="' + id + '"><h3>' + esc(rec.name) + "</h3>";
+    html += "<p>" + esc(rec.store) + "</p>";
+    if (t.total == null) html += '<p class="muted">Not yet scored</p>';
+    else if (!t.complete) html += "<p>" + t.total + " points so far (" + t.counted + " of 7)</p>";
+    else html += "<p><strong>" + t.total + " / 100</strong>" + (monthKey === "q4" ? " (quarterly average)" : "") + " | " + tier + "</p>";
+    if (m && m.revenue_actual_mtd != null && m.revenue_goal)
+      html += "<p>Revenue " + money(m.revenue_actual_mtd) + " vs " + money(m.revenue_goal) + "</p>";
+    html += "</button>";
+  });
+  html += "</div>";
+  return html;
+}
+
+function notValid() {
+  document.getElementById("app").innerHTML =
+    '<div class="brand">Bobbles &amp; Lace</div>' +
+    '<div class="err"><h2>This link is not valid</h2>' +
+    "<p>Please use the leadership link sent to you, or ask Kelsey for a new one.</p></div>";
+}
+
+(function init() {
+  var app = document.getElementById("app");
+  var params = new URLSearchParams(window.location.search);
+  var token = params.get("k") || "";
+  if (!token) { notValid(); return; }
+  Promise.all([
+    fetch(WORKER + "/api/leadership?k=" + encodeURIComponent(token)).then(function (r) { return r.json(); }),
+    fetch("/leadership-data.json").then(function (r) { return r.json(); })
+  ]).then(function (results) {
+    var scope = results[0], data = results[1];
+    if (!scope.ok) { notValid(); return; }
+    var monthKey = "2026-10";
+    function render() {
+      if (scope.overview) {
+        app.innerHTML = overviewView(monthKey, scope.directors, data.stores);
+      } else {
+        var rec = scope.record;
+        app.innerHTML = directorView(monthKey, rec, data.stores[rec.store], false, data.generated_at_et);
+      }
+      bind();
+    }
+    function bind() {
+      document.querySelectorAll("[data-month]").forEach(function (b) {
+        b.addEventListener("click", function () { monthKey = b.getAttribute("data-month"); render(); });
+      });
+      document.querySelectorAll("[data-dir]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var rec = scope.directors[b.getAttribute("data-dir")];
+          app.innerHTML = directorView(monthKey, rec, data.stores[rec.store], true, data.generated_at_et);
+          document.getElementById("backBtn").addEventListener("click", render);
+          bind();
+        });
+      });
+    }
+    render();
+  }).catch(function () { notValid(); });
+})();
+</script>
+</body>
+</html>
