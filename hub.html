@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Directors Hub | Bobbles &amp; Lace</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f8f8f7; --tint:#ece9e4; --accent:#e1d4ca; --line:#ddd7d2; --brown:#4b3328; --text:#000; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Raleway, sans-serif; line-height:1.5; }
+  .wrap { max-width:920px; margin:0 auto; padding:32px 20px 72px; }
+  .brand { font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--brown); font-weight:700; }
+  h1 { color:var(--brown); font-size:30px; margin:10px 0 6px; line-height:1.2; }
+  .sub { color:#555; margin:0 0 24px; font-size:17px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:24px; margin-bottom:24px; }
+  .card h2 { color:var(--brown); font-size:18px; margin:0 0 16px; }
+  .storegrid { display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; }
+  .storecard { background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; }
+  .storecard h3 { color:var(--brown); margin:0 0 6px; font-size:20px; }
+  .storecard p { margin:6px 0; font-size:14px; line-height:1.5; color:#555; }
+  .storecard a { color:var(--brown); font-weight:700; text-decoration:underline; font-size:15px; }
+  .coming { display:inline-block; background:var(--tint); color:var(--brown); font-size:12px; font-weight:700; letter-spacing:.12em; padding:6px 12px; border-radius:999px; margin-top:8px; }
+  .dirgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px; }
+  .dircard { background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; }
+  .dircard h3 { color:var(--brown); margin:0 0 6px; font-size:18px; }
+  .dircard p { margin:6px 0; font-size:14px; line-height:1.5; color:#555; }
+  .dircard a { color:var(--brown); font-weight:700; text-decoration:underline; font-size:15px; }
+  .event { display:flex; gap:16px; padding:12px 0; border-bottom:1px solid var(--tint); }
+  .event:last-child { border-bottom:none; }
+  .event-date { min-width:90px; font-weight:700; color:var(--brown); font-size:14px; }
+  .event-body { font-size:15px; line-height:1.5; }
+  .event-time { color:#666; font-size:13px; }
+  .post { padding:16px 0; border-bottom:1px solid var(--tint); }
+  .post:last-child { border-bottom:none; }
+  .post h3 { color:var(--brown); margin:0 0 6px; font-size:16px; }
+  .post p { margin:0; font-size:15px; line-height:1.6; }
+  .post-date { color:#666; font-size:13px; margin-top:6px; }
+  .muted { color:#666; font-size:14px; }
+  @media (max-width:600px) { .storegrid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">Bobbles &amp; Lace</div>
+  <h1>Directors Hub</h1>
+  <p class="sub">Your four stores, your scorecards, and what is happening this week, all in one place.</p>
+
+  <div class="card">
+    <h2>Your stores</h2>
+    <div class="storegrid">
+      <div class="storecard">
+        <h3>Charleston</h3>
+        <p>577 King St, Charleston, SC</p>
+        <a href="https://bobbles-franchise-dashboard.pages.dev/?store=Charleston">Open store dashboard</a>
+      </div>
+      <div class="storecard">
+        <h3>Savannah</h3>
+        <p>103 W Broughton St, Savannah, GA</p>
+        <a href="https://bobbles-franchise-dashboard.pages.dev/?store=Savannah">Open store dashboard</a>
+      </div>
+      <div class="storecard">
+        <h3>Charlotte</h3>
+        <p>1800 Camden Rd, Charlotte, NC</p>
+        <span class="coming">Opening February 2027</span>
+      </div>
+      <div class="storecard">
+        <h3>Greenville</h3>
+        <p>233 N Main St, Greenville, SC</p>
+        <span class="coming">Opening February 2027</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Scorecards</h2>
+    <div class="dirgrid">
+      <div class="dircard">
+        <h3>Carly</h3>
+        <p>Charleston, operations</p>
+        <a href="/?k=f187a7da32353a0528c2467e57b79dca">Open my scorecard</a>
+      </div>
+      <div class="dircard">
+        <h3>Annabella</h3>
+        <p>Charleston, store director</p>
+        <a href="/?k=7893b49ee0ea880cb5ecb22937f8355f">Open my scorecard</a>
+      </div>
+      <div class="dircard">
+        <h3>Shelbi</h3>
+        <p>Savannah, store director</p>
+        <a href="/?k=64fdb689c2a2644599b8ec00f1deaa51">Open my scorecard</a>
+      </div>
+      <div class="dircard">
+        <h3>Mandolyn</h3>
+        <p>Savannah, assistant store director</p>
+        <a href="/?k=2ec350493517164b033671d67afc4bcc">Open my scorecard</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Calendar of events</h2>
+    <div id="eventsBody"><p class="muted">Loading events...</p></div>
+  </div>
+
+  <div class="card">
+    <h2>Bulletin board</h2>
+    <div id="bulletinBody"><p class="muted">Loading announcements...</p></div>
+  </div>
+</div>
+<script>
+  fetch("events.json").then(function(r){ return r.json(); }).then(function(data){
+    var body = document.getElementById("eventsBody");
+    if(!data.events || !data.events.length){ body.innerHTML = "<p class=\"muted\">No events scheduled right now.</p>"; return; }
+    body.innerHTML = data.events.map(function(e){
+      return "<div class=\"event\"><div class=\"event-date\">" + e.date + "</div><div class=\"event-body\">" + e.title + (e.time ? "<div class=\"event-time\">" + e.time + "</div>" : "") + "</div></div>";
+    }).join("");
+  }).catch(function(){ document.getElementById("eventsBody").innerHTML = "<p class=\"muted\">Events are not available right now.</p>"; });
+
+  fetch("bulletin.json").then(function(r){ return r.json(); }).then(function(data){
+    var body = document.getElementById("bulletinBody");
+    if(!data.posts || !data.posts.length){ body.innerHTML = "<p class=\"muted\">Nothing posted yet.</p>"; return; }
+    body.innerHTML = data.posts.map(function(p){
+      return "<div class=\"post\"><h3>" + p.title + "</h3><p>" + p.body + "</p><div class=\"post-date\">" + p.date + "</div></div>";
+    }).join("");
+  }).catch(function(){ document.getElementById("bulletinBody").innerHTML = "<p class=\"muted\">Announcements are not available right now.</p>"; });
+</script>
+</body>
+</html>
