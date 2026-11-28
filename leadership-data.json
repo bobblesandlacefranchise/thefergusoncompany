@@ -1,5 +1,5 @@
 {
-  "generated_at_et": "2026-11-27T12:59:16Z",
+  "generated_at_et": "2026-11-28T12:59:16Z",
   "source": "Charleston 2026 Goal Tracking and Savannah 2026 Goal Tracking spreadsheets, read-only. No Lightspeed data. Savannah revenue/UPC/ASV come from the month-sheet summary blocks, never the KPI Tracker.",
   "units": "Money in dollars; UPC/ASV plain numbers; all *_pct and mix shares in percent units (21.68 means 21.68%). Months with no data yet report null actuals, never zeros.",
   "stores": {
